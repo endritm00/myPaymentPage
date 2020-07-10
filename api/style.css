@@ -1,0 +1,244 @@
+* {
+  box-sizing: border-box;
+}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 101; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+  height: 90%;
+}
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/**support button**/
+.carrd_bttn {
+  position: fixed;
+
+  /* change color of the button */
+  background-color: #5E70FF;
+  z-index: 100;
+
+  /* change position of the button, e.g. set top:0 to bottom:0 OR from top:0 to top:50% */
+  right: 0;
+  top: 0;
+
+  /* depending on the location of the button, you have to adjust the border-radius of the button */
+  border-bottom-right-radius: 0rem;
+  border-bottom-left-radius: 0.5rem;
+  padding: 0.8rem 1rem 0.8rem 1rem;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.carrd_bttn_img {
+  width: 1.125rem;
+  height: auto;
+  margin-right: 0.525rem;
+}
+
+.carrd_bttn_text {
+  font-family: "Arial";
+  font-size: 0.9rem;
+  color: #fff;
+  letter-spacing: 0.01rem;
+}
+
+/**support form**/
+
+.container input[type="text"],
+select,
+textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-top: 6px;
+  margin-bottom: 16px;
+  resize: vertical;
+}
+
+input[type="submit"] {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+.container {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+
+/**upgrade modal**/
+.columns {
+  float: left;
+  width: 32%;
+  padding: 8px;
+ }
+
+.columns.selected {
+  
+  float: left;
+  width: 32%;
+  padding: 8px;
+  outline: 4px solid red;
+}
+
+.priced {
+  list-style-type: none;
+  border: 1px solid #eee;
+  margin: 0;
+  padding: 0;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.priced:hover {
+  box-shadow: 0 8px 12px 0 rgba(0, 0, 0, 0.2);
+}
+
+.priced .header {
+  background-color: #111;
+  color: white;
+  font-size: 25px;
+}
+
+.priced li {
+  border-bottom: 1px solid #eee;
+  padding: 20px;
+  text-align: center;
+}
+
+.priced .grey {
+  background-color: #eee;
+  font-size: 20px;
+}
+
+.buttons {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 10px 25px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 18px;
+}
+
+.upgradeButton {
+  display:inline-block;
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 10px 25px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 18px;
+  margin-top:15px;
+}
+
+@media only screen and (max-width: 600px) {
+  .columns {
+    width: 100%;
+  }
+}
+
+/**Upgrade Form**/
+
+.creditcardNumber {
+  text-align: center;
+  background: #FFFFFF;
+  outline: none;
+  draggable: true;
+  font-family: Arial, Helvetica, sans-serif;
+  text-decoration: none;
+  transition: all 0.5s ease-out;
+  opacity: 1;
+  margin: 8px 0;
+  position: relative;
+  width: 50%;
+  padding: 12px;
+  display: block;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  float: left;
+}
+
+.creditcardExpiry {
+  text-align: center;
+  background: #FFFFFF;
+  outline: none;
+  draggable: true;
+  font-family: Arial, Helvetica, sans-serif;
+  text-decoration: none;
+  transition: all 0.5s ease-out;
+  opacity: 1;
+  margin: 8px 0;
+  position: relative;
+  width: 25%;
+  padding: 12px;
+  display: block;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  float: left;
+}
+
+.creditcardCvv {
+  text-align: center;
+  background: #FFFFFF;
+  outline: none;
+  draggable: true;
+  font-family: Arial, Helvetica, sans-serif;
+  text-decoration: none;
+  transition: all 0.5s ease-out;
+  opacity: 1;
+  margin: 8px 0;
+  position: relative;
+  width: 25%;
+  padding: 12px;
+  display: inline-block;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  float: right;
+}

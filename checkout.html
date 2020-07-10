@@ -1,0 +1,126 @@
+
+<style>
+  .MyCardElement {
+height: 40px;
+padding: 10px 12px;
+width: 100%;
+color: #32325d;
+background-color: white;
+border: 1px solid transparent;
+border-radius: 4px;
+box-shadow: 0 1px 3px 0 #e6ebf1;
+
+box-shadow: 0 1px 3px 0 #e6ebf1;
+-webkit-transition: box-shadow 150ms ease;
+transition: box-shadow 150ms ease;
+}
+
+.MyCardElement--focus {
+box-shadow: 0 1px 3px 0 #cfd7df;
+}
+
+.MyCardElement--invalid {
+border-color: #fa755a;
+}
+
+.MyCardElement--webkit-autofill {
+background-color: #fefde5 !important;
+  }
+  </style>
+
+<head>
+  <title>Checkout</title>
+  <script src="https://js.stripe.com/v3/"></script>
+  <script src='https://code.jquery.com/jquery-3.4.1.min.js'></script>
+  <link rel="stylesheet" href="StripeElements.css">
+</head>
+<body style="background-image: url(https://cdn.glitch.com/ce02920b-56ff-4f54-bebd-18f0122fc711%2Fphoto-1462332420958-a05d1e002413.jpg?v=1589070866753);background-attachment: fixed;background-position: center;background-size: cover;">
+
+<form id="payment-form" style="width: 500px;position: fixed;top: 50%;left: 50%;transform: translate(-50%, -50%);">
+  <div id="card-element" style="background-color:white; height: 40px;">
+  </div>
+  <div id="card-errors" role="alert"></div>
+  <br>
+
+  <button id="submit">Pay</button>
+</form>
+
+</body>
+
+<script>
+ 
+
+function getSecret() {
+
+var remote;
+$.ajax({
+    type: "POST",
+    url: '/api/stripe_checkout',
+    data: {
+      amount: localStorage.amount || 0
+    },
+    async: false,
+    success : function(data) {
+        remote = data;
+    }
+});
+
+return JSON.parse(remote);
+
+}
+
+  var stripe = Stripe('pk_test_y1HAL155FY35uwHNQMHSZmf900W9mKnHfU');
+  var elements = stripe.elements();
+
+  var style = {
+    base: {
+    color: "#32325d",
+    fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+    fontSmoothing: "antialiased",
+    fontSize: "16px",
+    "::placeholder": {
+      color: "#aab7c4"
+    }
+  },
+  invalid: {
+    color: "#fa755a",
+    iconColor: "#fa755a"
+  }
+};
+  
+
+  var card = elements.create("card", { style: style });
+  card.mount("#card-element");
+
+  card.on('change', ({error}) => {
+  const displayError = document.getElementById('card-errors');
+  if (error) {
+    displayError.textContent = error.message;
+  } else {
+    displayError.textContent = '';
+  }
+});
+
+var form = document.getElementById('payment-form');
+
+form.addEventListener('submit', function(ev) {
+  ev.preventDefault();
+  stripe.confirmCardPayment(getSecret().client_secret, {
+    payment_method: {
+      card: card,
+      
+      // Can add aditional client details(ex. email, name)
+    }
+  }).then(function(result) {
+    if (result.error) {
+     
+      console.log(result.error.message);
+    } else {     
+      if (result.paymentIntent.status === 'succeeded') {
+        console.log(result);
+        window.location = "/checkoutSuccessful";
+      }
+    }
+  });
+});
+</script>
